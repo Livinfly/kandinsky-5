@@ -1,3 +1,5 @@
+Portable benchmarks: [uv setup, E2E/DiT timing, GPU waiting and reports](benchmarks/README.md).
+
 <div align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="assets/KANDINSKY_LOGO_1_WHITE.png">

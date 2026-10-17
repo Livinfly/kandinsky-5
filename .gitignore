@@ -2,3 +2,9 @@
 **/weights/**
 weights
 **/.ipynb_checkpoints/**
+
+.venv/
+.cache/
+outputs/
+benchmarks/reference/
+*.mp4

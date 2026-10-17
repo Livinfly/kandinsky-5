@@ -1,0 +1,13 @@
+{
+  "prompt": "A woman sits at a wooden table by the window in a cozy café. She reaches out with her right hand, picks up the white coffee cup from the saucer, and gently brings it to her lips to take a sip. After drinking, she places the cup back on the table and looks out the window, enjoying the peaceful atmosphere.",
+  "negative_caption": "Static, 2D cartoon, cartoon, 2d animation, paintings, images, worst quality, low quality, ugly, deformed, walking backwards",
+  "time_length": 10,
+  "width": 768,
+  "height": 512,
+  "seed": 1137,
+  "num_steps": 50,
+  "guidance_weight": 5.0,
+  "scheduler_scale": 5.0,
+  "expand_prompts": false,
+  "attention_engine": "auto"
+}
