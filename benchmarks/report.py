@@ -123,6 +123,8 @@ def generate_report(suite, baseline=None):
     findings = review_measurements(rows)
     lines += ['', '复查提示：CV > 2% 或连续三次变快且首尾下降 > 2%；单次无法评估波动，不自动增加请求次数。', '']
     lines += [f'- {finding}' for finding in findings] or ['- 暂无。']
+    from sparse_attention import report_lines
+    lines += report_lines(rows)
     (suite/'report.md').write_text('\n'.join(lines))
     write_json(suite/'summary.json',dict(status=status['status'],plan=plan,
         results=[{k:v for k,v in r.items() if k!='effective'} for r in rows],timing_comparisons=comparisons, review=findings))

@@ -78,6 +78,7 @@ def main():
             pipe.dit = timer if mode == 'dit' else inner
             if mode == 'dit':
                 timer.count = 0
+                timer.attach_sparse()
             reset_random(torch, np, config['seed'])
             torch.cuda.synchronize()
             dist.barrier()
@@ -95,6 +96,8 @@ def main():
 
             # All checks, event queries and serialization below are OUTSIDE E2E.
             pipe.dit = inner
+            if mode == 'dit':
+                timer.detach_sparse()
             torch.cuda.synchronize()
             steps = timer.elapsed_ms() if mode == 'dit' else None
             if warmup:
@@ -102,7 +105,7 @@ def main():
                     raise ValueError('Non-finite floating latent or VAE output in warmup')
                 if list(observer.validation[1].shape) != expected_shape:
                     raise ValueError('Unexpected floating VAE output shape')
-            local = dict(rank=rank, response_e2e_s=response_s, distributed_e2e_s=distributed_s,
+            local = dict(sparse_attention=timer.sparse_result() if mode == 'dit' and plan.get('sparse_attention_timing') else None, rank=rank, response_e2e_s=response_s, distributed_e2e_s=distributed_s,
                 dit_step_ms=steps, vae_tiling=list(observer.tiles), floating_finite_checked=warmup,
                 peak_allocated_gib=torch.cuda.max_memory_allocated()/2**30,
                 peak_reserved_gib=torch.cuda.max_memory_reserved()/2**30)
